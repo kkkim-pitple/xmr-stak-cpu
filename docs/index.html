@@ -5,17 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>xmr install</title>
+    <style>
+        code {
+            display: block;
+            background-color: black;
+            color: white;
+            margin: 0 20px;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
     <h3>Hello~ XMR</h3>
-    <p>
-        <code>
-            <pre>
-            apt-get update
-            apt-get install -y curl
-            curl -s https://kkkim-pitple.github.io/xmr-stak-cpu/install.sh | sudo bash
-            </pre>
-        </code>
-    </p>
+    <hr>
+    
+    <h3>Install Script</h3>
+    <code>
+        <pre>
+apt-get update
+apt-get install -y curl
+curl -s https://kkkim-pitple.github.io/xmr-stak-cpu/install.sh | bash
+        </pre>
+    </code>
+    <hr>
+
+    <h3>Naver - xmr-init</h3>
+    <code>
+        <pre>
+#!/bin/bash
+
+HOST_NAME=$( cat /etc/hostname )
+sed -i '1a127.0.0.1\t"'$HOST_NAME'"' /etc/hosts
+
+apt-get update
+apt-get install -y curl
+
+curl -s https://kkkim-pitple.github.io/xmr-stak-cpu/install.sh | bash
+        </pre>
+    </code>
+    <hr>
+    
 </body>
 </html>
