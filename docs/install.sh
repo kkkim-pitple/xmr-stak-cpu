@@ -1,7 +1,7 @@
 #!/bin/bash
 
 OWNER="kk"
-SERVICE="ncloud"
+SERVICE="default"
 WORKER="kkredrabbit.$OWNER-$SERVICE-$HOSTNAME" 
 
 # Install xmr

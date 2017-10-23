@@ -23,9 +23,19 @@
     <h3>Install Script</h3>
     <code>
         <pre>
-apt-get update
-apt-get install -y curl
-curl -s https://kkkim-pitple.github.io/xmr-stak-cpu/install.sh | bash
+sudo apt-get update
+sudo apt-get install -y curl
+sudo curl -s http://xmr.pitple.com/install.sh | sudo bash
+<hr>
+# woker name
+sudo curl -s http://xmr.pitple.com/install.sh > install.sh
+chmod 755 install.sh
+vi install.sh
+./install.sh
+<hr>
+# screen
+cd ~/xmr-stak-cpu/bin
+screen sudo ./xmr-stak-cpu
         </pre>
     </code>
     <hr>
