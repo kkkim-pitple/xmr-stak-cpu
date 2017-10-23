@@ -1,8 +1,11 @@
 #!/bin/bash
 
-echo "[`date`] == Install xmr =="
+OWNER="kk"
+SERVICE="ncloud"
+WORKER="kkredrabbit.$OWNER-$SERVICE-$HOSTNAME" 
 
-# apt install
+# Install xmr
+echo "[`date`] == Install xmr =="
 sudo apt-get update
 sudo apt-get install -y git libmicrohttpd-dev libssl-dev cmake build-essential libhwloc-dev
 
@@ -35,37 +38,26 @@ CPU_THREADS_CONF+="],\n"
 sudo sed -i -r \
     -e "s/^null,/$CPU_THREADS_CONF/" \
     -e 's/^("pool_address" : ).*,/\1"asia.cryptonight-hub.miningpoolhub.com:20580",/' \
-    -e 's/^("wallet_address" : ).*,/\1"kkredrabbit.xmr-'"${HOSTNAME}"'",/' \
+    -e 's/^("wallet_address" : ).*,/\1"'$WORKER'",/' \
     -e 's/^("pool_password" : ).*,/\1"x",/' \
     ~/xmr-stak-cpu/bin/config.txt
 
 # Update System Memory Config
 echo "[`date`] == Update System Memory Config =="
 LIMITS_CONF=/etc/security/limits.conf
-
-grep -q -F '*'$'\t''soft'$'\t''memlock'$'\t''262144' "$LIMITS_CONF" || sudo echo -e "*\tsoft\tmemlock\t262144" >> "$LIMITS_CONF"
-grep -q -F '*'$'\t''hard'$'\t''memlock'$'\t''262144' "$LIMITS_CONF" || sudo echo -e "*\thard\tmemlock\t262144" >> "$LIMITS_CONF"
-#cat "$LIMITS_CONF"
-
-# Update System Memory Config
-echo "[`date`] == Update System Memory Config =="
-LIMITS_CONF=/etc/security/limits.conf
-
-grep -q -F '*'$'\t''soft'$'\t''memlock'$'\t''262144' "$LIMITS_CONF" || sudo echo -e "*\tsoft\tmemlock\t262144" >> "$LIMITS_CONF"
-grep -q -F '*'$'\t''hard'$'\t''memlock'$'\t''262144' "$LIMITS_CONF" || sudo echo -e "*\thard\tmemlock\t262144" >> "$LIMITS_CONF"
-#cat "$LIMITS_CONF"
+grep -q -P "\*\tsoft\tmemlock\t262144" $LIMITS_CONF || sudo echo -e "*\tsoft\tmemlock\t262144" >> $LIMITS_CONF
+grep -q -P "\*\thard\tmemlock\t262144" $LIMITS_CONF || sudo echo -e "*\thard\tmemlock\t262144" >> $LIMITS_CONF
+#cat $LIMITS_CONF
 
 # Update Update Enable HugePage
 echo "[`date`] == Update Enable HugePage =="
-
-HUGE_PAGE="vm.nr_hugepages=128"
+HUGE_PAGE="vm.nr_hugepages=512"
 HUGE_PAGE_CONF=/etc/sysctl.conf
+grep -q $HUGE_PAGE $HUGE_PAGE_CONF || sudo echo -e "\n# HugePages\n$HUGE_PAGE" >> $HUGE_PAGE_CONF
+cat $HUGE_PAGE_CONF
 
-grep -q -F "$HUGE_PAGE" "$HUGE_PAGE_CONF" || sudo echo "$HUGE_PAGE" >> "$HUGE_PAGE_CONF"
-
-sudo sysctl -w "$HUGE_PAGE"
+sudo sysctl -w $HUGE_PAGE
 sudo sysctl -p
-#cat "$HUGE_PAGE_CONF"
 
 # Done!
 echo "[`date`]== Install Done! =="
@@ -73,4 +65,4 @@ echo "[`date`]== Install Done! =="
 # Run Mining
 echo "[`date`] == Run Mining =="
 cd ~/xmr-stak-cpu/bin
-./xmr-stak-cpu
+sudo ./xmr-stak-cpu
