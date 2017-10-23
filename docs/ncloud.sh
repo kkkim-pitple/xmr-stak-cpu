@@ -1,39 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>xmr install</title>
-    <style>
-        code {
-            display: block;
-            background-color: black;
-            color: white;
-            margin: 0 20px;
-            padding: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h3>Hello~ XMR</h3>
-    <a href="https://kkkim-pitple.github.io/xmr-stak-cpu/install.html">install.sh</a>
-    <hr>
-    
-    <h3>Install Script</h3>
-    <code>
-        <pre>
-apt-get update
-apt-get install -y curl
-curl -s https://kkkim-pitple.github.io/xmr-stak-cpu/install.sh | bash
-        </pre>
-    </code>
-    <hr>
-
-    <!-- ncloud -->
-    <h3>ncloud : <a href="https://console.ncloud.com/dashboard" target="_blank">https://console.ncloud.com/dashboard</a></h3>
-    <code>
-        <pre>
 #!/bin/bash
 
 OWNER="kk"
@@ -107,10 +71,3 @@ echo "[`date`]== Install Done! =="
 echo "[`date`] == Run Mining =="
 cd ~/xmr-stak-cpu/bin
 sudo ./xmr-stak-cpu
-            
-        </pre>
-    </code>
-    <hr>
-    
-</body>
-</html>

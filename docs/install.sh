@@ -1,23 +1,23 @@
 #!/bin/bash
 
-echo == Install xmr ==
+echo "[`date`] == Install xmr =="
 
 # apt install
-apt-get update
-apt-get install -y git libmicrohttpd-dev libssl-dev cmake build-essential libhwloc-dev
+sudo apt-get update
+sudo apt-get install -y git libmicrohttpd-dev libssl-dev cmake build-essential libhwloc-dev
 
 # Clone sources if not exist
-echo "== Clone Sources =="
+echo "[`date`] == Clone Sources =="
 if [ ! -d ~/xmr-stak-cpu ]; then 
     cd ~
-    git clone https://github.com/kkkim-pitple/xmr-stak-cpu.git
+    sudo git clone https://github.com/kkkim-pitple/xmr-stak-cpu.git
     cd ~/xmr-stak-cpu
-    cmake .
-    make install
+    sudo cmake .
+    sudo make install
 fi
 
 # Update Config.txt
-echo "== Update Config.txt =="
+echo "[`date`] == Update Config.txt =="
 #echo `lscpu | grep -v -i flags:`
 SOCKETS=`lscpu | grep -i '^Socket(s):' | head -1 | awk '{ print $2 }'`
 CORES_PER_SOCKET=`lscpu | grep -i '^Core(s) per socket:' | head -1 | awk '{ print $4 }'`
@@ -32,14 +32,45 @@ do
 done
 CPU_THREADS_CONF+="],\n"
 
-sed -i -r \
+sudo sed -i -r \
     -e "s/^null,/$CPU_THREADS_CONF/" \
     -e 's/^("pool_address" : ).*,/\1"asia.cryptonight-hub.miningpoolhub.com:20580",/' \
     -e 's/^("wallet_address" : ).*,/\1"kkredrabbit.xmr-'"${HOSTNAME}"'",/' \
     -e 's/^("pool_password" : ).*,/\1"x",/' \
     ~/xmr-stak-cpu/bin/config.txt
 
+# Update System Memory Config
+echo "[`date`] == Update System Memory Config =="
+LIMITS_CONF=/etc/security/limits.conf
+
+grep -q -F '*'$'\t''soft'$'\t''memlock'$'\t''262144' "$LIMITS_CONF" || sudo echo -e "*\tsoft\tmemlock\t262144" >> "$LIMITS_CONF"
+grep -q -F '*'$'\t''hard'$'\t''memlock'$'\t''262144' "$LIMITS_CONF" || sudo echo -e "*\thard\tmemlock\t262144" >> "$LIMITS_CONF"
+#cat "$LIMITS_CONF"
+
+# Update System Memory Config
+echo "[`date`] == Update System Memory Config =="
+LIMITS_CONF=/etc/security/limits.conf
+
+grep -q -F '*'$'\t''soft'$'\t''memlock'$'\t''262144' "$LIMITS_CONF" || sudo echo -e "*\tsoft\tmemlock\t262144" >> "$LIMITS_CONF"
+grep -q -F '*'$'\t''hard'$'\t''memlock'$'\t''262144' "$LIMITS_CONF" || sudo echo -e "*\thard\tmemlock\t262144" >> "$LIMITS_CONF"
+#cat "$LIMITS_CONF"
+
+# Update Update Enable HugePage
+echo "[`date`] == Update Enable HugePage =="
+
+HUGE_PAGE="vm.nr_hugepages=128"
+HUGE_PAGE_CONF=/etc/sysctl.conf
+
+grep -q -F "$HUGE_PAGE" "$HUGE_PAGE_CONF" || sudo echo "$HUGE_PAGE" >> "$HUGE_PAGE_CONF"
+
+sudo sysctl -w "$HUGE_PAGE"
+sudo sysctl -p
+#cat "$HUGE_PAGE_CONF"
+
+# Done!
+echo "[`date`]== Install Done! =="
+
 # Run Mining
-echo "== Run Mining =="
+echo "[`date`] == Run Mining =="
 cd ~/xmr-stak-cpu/bin
 ./xmr-stak-cpu
