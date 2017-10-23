@@ -1,7 +1,7 @@
 #!/bin/bash
 
 OWNER="kk"
-SERVICE="default"
+SERVICE="azure"
 WORKER="kkredrabbit.$OWNER-$SERVICE-$HOSTNAME" 
 
 # Install xmr
