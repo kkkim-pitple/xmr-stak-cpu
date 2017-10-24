@@ -59,7 +59,7 @@ grep -q -P "\*\thard\tmemlock\t262144" $LIMITS_CONF || sudo echo -e "*\thard\tme
 
 # Update Update Enable HugePage
 echo "[`date`] == Update Enable HugePage =="
-HUGE_PAGE="vm.nr_hugepages=512"
+HUGE_PAGE="vm.nr_hugepages=128"
 HUGE_PAGE_CONF=/etc/sysctl.conf
 grep -q $HUGE_PAGE $HUGE_PAGE_CONF || sudo echo -e "\n# HugePages\n$HUGE_PAGE" >> $HUGE_PAGE_CONF
 cat $HUGE_PAGE_CONF
@@ -68,7 +68,7 @@ sudo sysctl -w $HUGE_PAGE
 sudo sysctl -p
 
 # Done!
-echo "[`date`]== Install Done! =="
+echo "[`date`] == Install Done! =="
 
 
 # Run Mining
