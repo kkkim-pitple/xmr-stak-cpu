@@ -65,8 +65,8 @@ LIMITS_CONF=/etc/security/limits.conf
 grep -q -P "\*\tsoft\tmemlock\t262144" $LIMITS_CONF || sudo echo -e "*\tsoft\tmemlock\t262144" >> $LIMITS_CONF
 grep -q -P "\*\thard\tmemlock\t262144" $LIMITS_CONF || sudo echo -e "*\thard\tmemlock\t262144" >> $LIMITS_CONF
 XMR_REBOOT_CHECK="# XMR REBOOT CHECK - DO NOT REMOVE"
-XMR_REBOOT=`grep -c $XMR_REBOOT_CHECK $LIMITS_CONF`
-XMR_REBOOT || sudo echo -e $XMR_REBOOT_CHECK >> $LIMITS_CONF
+XMR_REBOOT=$(grep -c "$XMR_REBOOT_CHECK" "$LIMITS_CONF")
+if [ $XMR_REBOOT -eq 0 ]; then sudo echo -e $XMR_REBOOT_CHECK >> $LIMITS_CONF; fi
 #cat $LIMITS_CONF
 
 # Update Update Enable HugePage
