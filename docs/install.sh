@@ -92,7 +92,7 @@ if [ ! -f $SUPERVISOR_CONF ]; then
     sudo echo "autorestart=true" >> $SUPERVISOR_CONF
     sudo echo "startretries=10" >> $SUPERVISOR_CONF
     sudo echo "redirect_stderr=true" >> $SUPERVISOR_CONF
-    sudo supervisor update
+    sudo supervisorctl update
 else
     echo "[`date`] == SKIP : supervisor setting =="
 fi
@@ -103,5 +103,5 @@ echo "[`date`] == Install Done! =="
 # Reboot if needed
 if [ $XMR_REBOOT -eq 0 ]; then
     echo "[`date`] == reboot =="
-#    sudo reboot
+    sudo reboot
 fi
