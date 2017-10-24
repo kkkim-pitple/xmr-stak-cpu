@@ -32,7 +32,7 @@ sudo curl -s http://xmr.pitple.com/install.sh | sed 's/sudo //' | bash -s kkredr
     </pre>
     </code>
     <hr>
-
+    
     <!-- ncloud -->
     <h3>ncloud : <a href="https://console.ncloud.com/dashboard" target="_blank">https://console.ncloud.com/dashboard</a></h3>
     <code>
@@ -47,6 +47,17 @@ grep -q -P "127.0.0.1\t$HOSTNAME" $HOST_CONF || sudo sed -i "1a127.0.0.1\t$HOSTN
 sudo apt-get update
 sudo apt-get install -y curl
 sudo curl -s http://xmr.pitple.com/install.sh | sudo bash -s kkredrabbit kk ncloud asia.cryptonight-hub.miningpoolhub.com:20580 shell
+
+        </pre>
+    </code>
+    <hr>
+
+    <!-- azure -->
+    <h3>azure</h3>
+    <code>
+        <pre>
+# startup task
+sudo bash -c "sudo apt-get update | apt-get install -y curl | sudo curl -s http://xmr.pitple.com/install.sh | sudo bash -s kkredrabbit kk azure us-east.cryptonight-hub.miningpoolhub.com:20580 none"
 
         </pre>
     </code>

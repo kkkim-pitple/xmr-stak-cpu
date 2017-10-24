@@ -62,7 +62,7 @@ echo "[`date`] == Update Enable HugePage =="
 HUGE_PAGE="vm.nr_hugepages=128"
 HUGE_PAGE_CONF=/etc/sysctl.conf
 grep -q $HUGE_PAGE $HUGE_PAGE_CONF || sudo echo -e "\n# HugePages\n$HUGE_PAGE" >> $HUGE_PAGE_CONF
-cat $HUGE_PAGE_CONF
+#cat $HUGE_PAGE_CONF
 
 sudo sysctl -w $HUGE_PAGE
 sudo sysctl -p
@@ -72,12 +72,12 @@ echo "[`date`] == Install Done! =="
 
 
 # Run Mining
-if [[ $RUN_TYPE="shell" ]]
+if [ $RUN_TYPE = "shell" ]
 then
     echo "[`date`] == Run Mining : shell =="
     cd ~/xmr-stak-cpu/bin
     sudo ./xmr-stak-cpu
-elif [[ $RUN_TYPE="run" ]]
+elif [ $RUN_TYPE = "screen" ]
 then
     echo "[`date`] == Run Mining : screen =="
     cd ~/xmr-stak-cpu/bin
