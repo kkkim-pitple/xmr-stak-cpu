@@ -73,10 +73,10 @@ echo "[`date`]== Install Done! =="
 
 # Run Mining
 if [[ $RUN_TYPE="shell" ]]
+then
     echo "[`date`] == Run Mining : shell =="
     cd ~/xmr-stak-cpu/bin
     sudo ./xmr-stak-cpu
-then
 elif [[ $RUN_TYPE="run" ]]
 then
     echo "[`date`] == Run Mining : screen =="
