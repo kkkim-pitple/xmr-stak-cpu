@@ -14,6 +14,13 @@ POOL=$4
 WORKER="$MINER.$OWNER-$SERVICE-$HOSTNAME"
 XMR_DIR=/usr/local/xmr-stak-cpu
 
+echo "MINER : $MINER"
+echo "OWNER : $OWNER"
+echo "SERVICE : $SERVICE"
+echo "POOL : $POOL"
+echo "WORKER : $WORKER"
+echo "XMR_DIR : $XMR_DIR"
+
 # apt update & install
 echo "[`date`] == apt update & install =="
 sudo apt-get update
