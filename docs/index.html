@@ -21,42 +21,25 @@
     <hr>
     
     <h3>Install Script</h3>
-    <code>
-        <pre>
-sudo curl -s http://xmr.pitple.com/install.sh | sudo bash -s kkredrabbit kk service asia.cryptonight-hub.miningpoolhub.com:20580
-<hr>
-# docker for test
-sudo curl -s http://xmr.pitple.com/install.sh | sed 's/sudo //' | bash -s kkredrabbit kk docker asia.cryptonight-hub.miningpoolhub.com:20580
-    </pre>
-    </code>
+    <code>sudo curl -s http://xmr.pitple.com/install.sh | sudo bash -s kkredrabbit kk service asia.cryptonight-hub.miningpoolhub.com:20580</code>
     <hr>
-    
-    <!-- ncloud -->
     <h3>ncloud : <a href="https://console.ncloud.com/dashboard" target="_blank">https://console.ncloud.com/dashboard</a></h3>
     <code>
         <pre>
 #!/bin/bash
-
 # ncloud Config
-echo "[`date`] == ncloud Config =="
 HOST_CONF=/etc/hosts
 grep -q -P "127.0.0.1\t$HOSTNAME" $HOST_CONF || sudo sed -i "1a127.0.0.1\t$HOSTNAME" $HOST_CONF
 
-sudo apt-get update
 sudo curl -s http://xmr.pitple.com/install.sh | sudo bash -s kkredrabbit kk ncloud asia.cryptonight-hub.miningpoolhub.com:20580
-
         </pre>
     </code>
     <hr>
 
     <!-- azure -->
     <h3>azure</h3>
-    <code>
-        <pre>
-sudo curl -s http://xmr.pitple.com/install.sh | sudo bash -s kkredrabbit kk azure us-east.cryptonight-hub.miningpoolhub.com:20580
-        </pre>
-    </code>
+    <code>sudo curl -s http://xmr.pitple.com/install.sh | sudo bash -s kkredrabbit kk azure us-east.cryptonight-hub.miningpoolhub.com:20580</code>
     <hr>
-    
+
 </body>
 </html>
