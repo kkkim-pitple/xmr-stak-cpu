@@ -3,6 +3,7 @@
 OWNER="kk"
 SERVICE="ncloud"
 WORKER="kkredrabbit.$OWNER-$SERVICE-$HOSTNAME" 
+POOL="asia.cryptonight-hub.miningpoolhub.com:20580"
 
 # ncloud Config
 echo "[`date`] == ncloud Config =="
@@ -42,7 +43,7 @@ CPU_THREADS_CONF+="],\n"
 
 sudo sed -i -r \
     -e "s/^null,/$CPU_THREADS_CONF/" \
-    -e 's/^("pool_address" : ).*,/\1"asia.cryptonight-hub.miningpoolhub.com:20580",/' \
+    -e 's/^("pool_address" : ).*,/\1"'$POOL'",/' \
     -e 's/^("wallet_address" : ).*,/\1"'$WORKER'",/' \
     -e 's/^("pool_password" : ).*,/\1"x",/' \
     ~/xmr-stak-cpu/bin/config.txt

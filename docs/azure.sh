@@ -1,16 +1,9 @@
 #!/bin/bash
-# MINER="kkredrabbit"
-# OWNER="kk"
-# SERVICE="ncloud"
-# POOL="asia.cryptonight-hub.miningpoolhub.com:20580"
-# RUN_TYPE="none" / shell / screen
 
-MINER=$1
-OWNER=$2
-SERVICE=$3
-POOL=$4
-RUN_TYPE=$5
-WORKER="$MINER.$OWNER-$SERVICE-$HOSTNAME"
+OWNER="kk"
+SERVICE="azure"
+WORKER="kkredrabbit.$OWNER-$SERVICE-$HOSTNAME" 
+POOL="us-east.cryptonight-hub.miningpoolhub.com:20580"
 
 # Install xmr
 echo "[`date`] == Install xmr =="
@@ -70,17 +63,7 @@ sudo sysctl -p
 # Done!
 echo "[`date`]== Install Done! =="
 
-
 # Run Mining
-if [[ $RUN_TYPE="shell" ]]
-    echo "[`date`] == Run Mining : shell =="
-    cd ~/xmr-stak-cpu/bin
-    sudo ./xmr-stak-cpu
-then
-elif [[ $RUN_TYPE="run" ]]
-then
-    echo "[`date`] == Run Mining : screen =="
-    cd ~/xmr-stak-cpu/bin
-    screen sudo ./xmr-stak-cpu
-fi
-
+echo "[`date`] == Run Mining =="
+cd ~/xmr-stak-cpu/bin
+sudo ./xmr-stak-cpu
